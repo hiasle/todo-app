@@ -4,19 +4,25 @@
       "id": "ba66f28e-bbbe-4a43-ba9d-d44bdec7a302",
       "name": "Birnen",
       "finished": false,
-      "amount": 5
+      "amount": 10
     },
     {
-      "id": "79d9df11-0142-4f37-bb2e-37d461140cd1",
-      "name": "Paprika",
+      "id": "833e6cba-a6a2-461e-bd7a-e2a125250bed",
+      "name": "Smöper",
       "finished": false,
-      "amount": 7
+      "amount": 8
     },
     {
-      "id": "5014c244-bfda-4584-84d8-3b8b8bbb4303",
-      "name": "Mehl",
+      "id": "fa4ca86b-a6fc-446a-ad43-710f9109a5d5",
+      "name": "Kartoffeln",
       "finished": false,
-      "amount": 1
+      "amount": 2
+    },
+    {
+      "id": "abaae0db-c7b6-4a28-b438-040fefda7770",
+      "name": "Eis",
+      "finished": false,
+      "amount": 3
     }
   ]
 }
