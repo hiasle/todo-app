@@ -20,23 +20,7 @@ export interface TodoModel {
 
 @State<TodoModel[]>({
   name: 'todoList',
-  defaults: [
-    /* {
-      id: '2',
-      name: 'Todo 1',
-      finished: false,
-    },
-    {
-      id: '3',
-      name: 'Todo 2',
-      finished: true,
-    },
-    {
-      id: '4',
-      name: 'Todo 3',
-      finished: false,
-    }, */
-  ],
+  defaults: [],
 })
 @Injectable()
 export class TodoListState implements NgxsOnInit {
