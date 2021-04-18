@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "id": "ba66f28e-bbbe-4a43-ba9d-d44bdec7a302",
+      "name": "Birnen",
+      "finished": false,
+      "amount": 2
+    },
+    {
+      "id": "79d9df11-0142-4f37-bb2e-37d461140cd1",
+      "name": "Paprika",
+      "finished": false,
+      "amount": 7
+    },
+    {
+      "id": "5014c244-bfda-4584-84d8-3b8b8bbb4303",
+      "name": "Mehl",
+      "finished": false,
+      "amount": 1
+    }
+  ]
+}

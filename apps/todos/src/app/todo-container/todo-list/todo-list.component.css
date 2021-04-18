@@ -1,0 +1,20 @@
+.todo-finished {
+  text-decoration: line-through;
+}
+
+.todo-item {
+  cursor: pointer;
+}
+
+.todo-button-group > button {
+  min-width: auto;
+  padding: 0;
+}
+
+.todo-button-group > button:first-child {
+  margin-right: 0.5rem;
+}
+
+.todo-button-group > button:last-child {
+  margin-left: 0.5rem;
+}

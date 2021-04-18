@@ -1,0 +1,21 @@
+.todo-container {
+  padding: 16px;
+}
+
+.todo-form {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-header {
+  background-color: #3f51b571;
+  color: white;
+  align-items: center;
+}
+
+.input-todo {
+  flex-grow: 1;
+  padding-right: 1rem;
+}

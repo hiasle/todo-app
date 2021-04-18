@@ -1,0 +1,58 @@
+<mat-list>
+  <mat-list-item *ngFor="let todo of todos$ | async" class="todo-item">
+    <mat-icon
+      mat-list-icon
+      *ngIf="todo.finished; else undone"
+      (click)="toggleStatus(todo)"
+      >done</mat-icon
+    >
+    <ng-template #undone>
+      <mat-icon
+        matBadge="{{ todo.amount }}"
+        matBadgeColor="primary"
+        mat-list-icon
+        #undone
+        (click)="toggleStatus(todo)"
+        >shopping_cart</mat-icon
+      >
+    </ng-template>
+    <div
+      mat-line
+      [class.todo-finished]="todo.finished"
+      (click)="toggleStatus(todo)"
+    >
+      {{ todo.name }}
+    </div>
+
+    <div class="todo-button-group">
+      <button
+        type="button"
+        mat-raised-button
+        title="-1"
+        color="warn"
+        (click)="decreaseAmount(todo.id)"
+      >
+        <mat-icon mat-list-icon>remove</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        title="+1"
+        color="warn"
+        (click)="increaseAmount(todo.id)"
+      >
+        <mat-icon mat-list-icon>add</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        title="Löschen"
+        color="warn"
+        [disabled]="!todo.finished"
+        (click)="deleteTodo(todo)"
+      >
+        <mat-icon mat-list-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-list-item>
+</mat-list>
