@@ -30,6 +30,7 @@
         mat-raised-button
         title="-1"
         color="warn"
+        [disabled]="todo.finished"
         (click)="decreaseAmount(todo.id)"
       >
         <mat-icon mat-list-icon>remove</mat-icon>
@@ -39,6 +40,7 @@
         mat-raised-button
         title="+1"
         color="warn"
+        [disabled]="todo.finished"
         (click)="increaseAmount(todo.id)"
       >
         <mat-icon mat-list-icon>add</mat-icon>

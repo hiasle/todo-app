@@ -1,5 +1,3 @@
-
-
 # Huber
 
 This project was generated using [Nx](https://nx.dev).
@@ -7,6 +5,12 @@ This project was generated using [Nx](https://nx.dev).
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
 🔎 **Powerful, Extensible Dev Tools**
+
+## Github deploy
+
+1. [Trigger build] ng build --prod --base-href "https://hiasle.github.io/todo-app/"
+2. [Deploy to GHPages] npx angular-cli-ghpages --dir dist/apps/todos
+3. [Browser] https://hiasle.github.io/todo-app/
 
 ## Quick Start & Documentation
 
@@ -86,11 +90,6 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-
-
-
-
 
 ## ☁ Nx Cloud
 

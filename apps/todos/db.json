@@ -3,26 +3,32 @@
     {
       "id": "ba66f28e-bbbe-4a43-ba9d-d44bdec7a302",
       "name": "Birnen",
-      "finished": false,
+      "finished": true,
       "amount": 10
     },
     {
       "id": "833e6cba-a6a2-461e-bd7a-e2a125250bed",
       "name": "Smöper",
-      "finished": false,
+      "finished": true,
       "amount": 8
     },
     {
       "id": "fa4ca86b-a6fc-446a-ad43-710f9109a5d5",
       "name": "Kartoffeln",
-      "finished": false,
+      "finished": true,
       "amount": 2
     },
     {
       "id": "abaae0db-c7b6-4a28-b438-040fefda7770",
       "name": "Eis",
-      "finished": false,
+      "finished": true,
       "amount": 3
+    },
+    {
+      "id": "4ad2520e-48fc-4f2f-bdb1-2116ca86e5d8",
+      "name": "Fisch",
+      "finished": true,
+      "amount": 19
     }
   ]
 }
