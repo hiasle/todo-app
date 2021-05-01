@@ -1,3 +1,4 @@
+import { TagsState } from './../store/tags.state';
 import { AddTodo } from './../store/actions';
 import { TodoListState, TodoModel } from './../store/state';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
@@ -24,6 +25,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 export class TodoContainerComponent implements OnInit {
   @Select(TodoListState) todos$: Observable<TodoModel[]>;
   @Select(TodoListState) todos2$: Observable<TodoModel[]>;
+  @Select(TagsState.tagNames) tagNames$: Observable<string[]>;
 
   todoForm: FormGroup;
 

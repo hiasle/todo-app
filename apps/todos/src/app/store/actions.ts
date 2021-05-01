@@ -1,3 +1,4 @@
+import { TagsModel } from './tags.state';
 import { TodoModel } from './state';
 
 export class GetTodos {
@@ -27,4 +28,13 @@ export class DecreaseAmountTodo {
 export class DeleteTodo {
   static readonly type = '[Todo List] Delete Todo';
   constructor(public id: string) {}
+}
+
+export class GetTags {
+  static readonly type = '[Tags] Get Todos';
+}
+
+export class AddTag {
+  static readonly type = '[Tags] Add Tag';
+  constructor(public tag: TagsModel) {}
 }

@@ -28,6 +28,15 @@
       <button
         type="button"
         mat-raised-button
+        title="taggen"
+        color="warn"
+        (click)="addTag(todo.name)"
+      >
+        <mat-icon mat-list-icon>star</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-raised-button
         title="-1"
         color="warn"
         [disabled]="todo.finished"

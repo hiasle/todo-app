@@ -1,6 +1,9 @@
+import { AppRoutingModule } from './app-routing.module';
+import { TagsModel, TagsState } from './store/tags.state';
+import { LoggingHttpInterceptor } from './shared/logging-http-interceptor';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,12 +22,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, TodoContainerComponent, TodoListComponent],
+  declarations: [AppComponent, TodoContainerComponent, TodoListComponent, LoginComponent],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot([TodoListState], {
+    NgxsModule.forRoot([TodoListState, TagsState], {
       developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
@@ -39,8 +46,18 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatIconModule,
     MatBadgeModule,
     MatButtonToggleModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoggingHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -29,6 +29,47 @@
       "name": "Fisch",
       "finished": true,
       "amount": 19
+    },
+    {
+      "id": "43b163c3-bedf-4936-97d3-d34f655f45bd",
+      "name": "eier",
+      "finished": false,
+      "amount": 3
+    },
+    {
+      "id": "2519927d-e83c-40bf-bb9f-53fe78cf91b2",
+      "name": "noch eins",
+      "finished": false,
+      "amount": 3
+    },
+    {
+      "id": "9c646756-b96f-4239-ba0c-4a8aec7be82c",
+      "name": "asfasdf",
+      "finished": false,
+      "amount": 1
+    },
+    {
+      "id": "42cad986-fbb6-4c0f-961a-fc10f0d01b1e",
+      "name": "nochmal",
+      "finished": false
+    }
+  ],
+  "tags": [
+    {
+      "name": "eier",
+      "id": 1
+    },
+    {
+      "name": "noch eins",
+      "id": 2
+    },
+    {
+      "name": "asfasdf",
+      "id": 3
+    },
+    {
+      "name": "nochmal",
+      "id": 4
     }
   ]
 }

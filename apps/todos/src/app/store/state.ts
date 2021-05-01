@@ -1,3 +1,4 @@
+import { TagsService } from './../shared/tags.service';
 import { Action, NgxsOnInit, State, StateContext, Store } from '@ngxs/store';
 import { TodoService } from '../shared/todo.service';
 import {
@@ -7,9 +8,11 @@ import {
   GetTodos,
   IncreaseAmountTodo,
   DecreaseAmountTodo,
+  GetTags,
 } from './actions';
 import { map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface TodoModel {
   id: string;
@@ -32,100 +35,74 @@ export class TodoListState implements NgxsOnInit {
   }
 
   @Action(GetTodos)
-  getTodos(ctx: StateContext<TodoModel[]>) {
+  getTodos(ctx: StateContext<TodoModel[]>): Observable<TodoModel[]> {
     const state = ctx.getState();
-    this.todoService
-      .fetchTodos()
-      .pipe(
-        tap((todos) => console.log('Todoservice called fetchTodos: ', todos)),
-        map((todo) => ctx.setState([...todo]))
-      )
-      .subscribe();
+    return this.todoService.fetchTodos().pipe(
+      tap((todos) => console.log('Todoservice called fetchTodos: ', todos)),
+      map((todo) => ctx.setState([...todo]))
+    );
   }
 
   @Action(AddTodo)
-  addTodo(ctx: StateContext<TodoModel[]>, action: AddTodo) {
+  addTodo(
+    ctx: StateContext<TodoModel[]>,
+    action: AddTodo
+  ): Observable<TodoModel[]> {
     const state = ctx.getState();
-    this.todoService
+    return this.todoService
       .addTodo(action.todo)
-      .subscribe(() => ctx.dispatch(new GetTodos()));
-    // .subscribe((todos) => ctx.setState([...state, action.todo]));
+      .pipe(tap(() => ctx.dispatch(new GetTodos())));
   }
 
   @Action(FinishTodo)
-  finishTodo(ctx: StateContext<TodoModel[]>, { id, finished }: FinishTodo) {
+  finishTodo(
+    ctx: StateContext<TodoModel[]>,
+    { id, finished }: FinishTodo
+  ): Observable<TodoModel[] | TodoModel> {
     const state = ctx.getState();
     let found = state.find((todo) => todo.id === id);
     found = { ...found };
     found.finished = finished;
-    this.todoService
+    return this.todoService
       .updateTodo(found, id)
-      .subscribe(() => ctx.dispatch(new GetTodos()));
-    /* ctx.setState([
-      ...state.map((t) =>
-        t.id !== id ? t : { id: t.id, name: t.name, finished: finished }
-      ),
-    ]); */
+      .pipe(tap(() => ctx.dispatch(new GetTodos())));
   }
 
   @Action(IncreaseAmountTodo)
   increaseAmountTodo(
     ctx: StateContext<TodoModel[]>,
     { id }: IncreaseAmountTodo
-  ) {
+  ): Observable<TodoModel> {
     const state = ctx.getState();
     const todo = state.find((todo) => todo.id === id);
     const modified = { ...todo, amount: todo.amount ? todo.amount + 1 : 1 };
-    this.todoService
-      .updateTodo(modified, id)
-      .subscribe(() => ctx.dispatch(new GetTodos()));
-
-    /* ctx.setState([
-      ...state.map((todo) => {
-        if (todo.id === id) {
-          let modified = { ...todo };
-          modified.amount = todo.amount ? todo.amount + 1 : 1;
-          return modified;
-        } else {
-          return todo;
-        }
-      }),
-    ]); */
+    return this.todoService.updateTodo(modified, id).pipe(
+      tap((todo) => console.log('Increase amount: ', todo)),
+      tap(() => ctx.dispatch(new GetTodos()))
+    );
   }
 
   @Action(DecreaseAmountTodo)
   decreaseAmountTodo(
     ctx: StateContext<TodoModel[]>,
     { id }: IncreaseAmountTodo
-  ) {
+  ): Observable<TodoModel> {
     const state = ctx.getState();
     const todo = state.find((todo) => todo.id === id);
     const modified = { ...todo, amount: todo.amount ? todo.amount - 1 : 0 };
-    this.todoService
-      .updateTodo(modified, id)
-      .subscribe(() => ctx.dispatch(new GetTodos()));
-
-    /* ctx.setState([
-      ...state.map((todo) => {
-        if (todo.id === id) {
-          let modified = { ...todo };
-          modified.amount = todo.amount ? todo.amount - 1 : 0;
-          return modified;
-        } else {
-          return todo;
-        }
-      }),
-    ]); */
+    return this.todoService.updateTodo(modified, id).pipe(
+      tap((todo) => console.log('Decrease amount: ', todo)),
+      tap(() => ctx.dispatch(new GetTodos()))
+    );
   }
 
   @Action(DeleteTodo)
   deleteTodo(ctx: StateContext<TodoModel[]>, { id }: DeleteTodo) {
     const state = ctx.getState();
-    this.todoService
+    return this.todoService
       .deleteTodo(id)
-      .subscribe(() =>
-        ctx.setState([...state.filter((todo) => todo.id !== id)])
+      .pipe(
+        tap(() => ctx.setState([...state.filter((todo) => todo.id !== id)]))
       );
-    // ctx.setState([...state.filter((todo) => todo.id !== id)]);
   }
 }

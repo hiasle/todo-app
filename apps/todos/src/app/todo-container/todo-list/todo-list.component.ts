@@ -3,6 +3,7 @@ import {
   DeleteTodo,
   DecreaseAmountTodo,
   IncreaseAmountTodo,
+  AddTag,
 } from './../../store/actions';
 import {
   ChangeDetectionStrategy,
@@ -42,5 +43,9 @@ export class TodoListComponent implements OnInit {
 
   increaseAmount(id: string): void {
     this.store.dispatch(new IncreaseAmountTodo(id));
+  }
+
+  addTag(name: string): void {
+    this.store.dispatch(new AddTag({ name: name }));
   }
 }

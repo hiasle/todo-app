@@ -1,30 +1,18 @@
 {
   "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     ".eslintrc.json": "*"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "npmScope": "huber",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "todos": {
-      "tags": []
-    },
-    "todos-e2e": {
-      "tags": [],
-      "implicitDependencies": ["todos"]
-    }
+    "todos": { "tags": [] },
+    "todos-e2e": { "tags": [], "implicitDependencies": ["todos"] }
   }
 }
