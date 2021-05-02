@@ -33,6 +33,9 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { FavoritesState } from './store/favorites.state';
+import { ShoppingListState } from './store/todos.state';
 
 @NgModule({
   declarations: [
@@ -43,12 +46,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    CategoriesListComponent,
   ],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot([TodoListState, TagsState], {
-      developmentMode: !environment.production,
-    }),
+    NgxsModule.forRoot(
+      [TodoListState, TagsState, FavoritesState, ShoppingListState],
+      {
+        developmentMode: !environment.production,
+      }
+    ),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
