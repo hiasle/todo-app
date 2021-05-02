@@ -1,0 +1,61 @@
+.signin-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin-card {
+  background-color: whitesmoke;
+  opacity: 90%;
+}
+
+.signin-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+.signin-other {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin-divider-text {
+  padding-top: 1rem;
+}
+
+.input-error {
+  color: red;
+}
+
+.login-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-inputs > mat-form-field {
+  flex-grow: 1;
+}
+
+.login-inputs > mat-form-field:first-child {
+  padding-right: 1rem;
+}
+
+.login-form-btn-group {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.login-form-btn-group > button:first-child {
+  margin-right: 0.5rem;
+}

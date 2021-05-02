@@ -25,16 +25,34 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { LoginComponent } from './login/login.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [AppComponent, TodoContainerComponent, TodoListComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    TodoContainerComponent,
+    TodoListComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+  ],
   imports: [
     BrowserModule,
     NgxsModule.forRoot([TodoListState, TagsState], {
       developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
@@ -49,6 +67,7 @@ import { LoginComponent } from './login/login.component';
     MatSelectModule,
     MatRadioModule,
     MatAutocompleteModule,
+    MatFormFieldModule,
     AppRoutingModule,
   ],
   providers: [

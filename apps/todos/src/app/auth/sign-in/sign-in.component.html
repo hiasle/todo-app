@@ -1,0 +1,72 @@
+<div class="signin-container">
+  <mat-card class="signin-card">
+    <mat-card-header class="signin-card-header"
+      ><h2>Sign in</h2></mat-card-header
+    >
+    <mat-card-content>
+      <div class="signin-other">
+        <button
+          mat-fab
+          type="button"
+          title="Google"
+          color="primary"
+          (click)="authService.GoogleAuth()"
+        >
+          G+
+        </button>
+        <p class="signin-divider-text">or use your account</p>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="login-inputs">
+          <mat-form-field appearance="outline" style="width: 200px">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="Email eingeben"
+              formControlName="email"
+            />
+            <mat-hint
+              *ngIf="emailCtrl.touched && !emailCtrl.valid"
+              class="input-error"
+              >Eine gültige E-Mail-Adresse ist erforderlich</mat-hint
+            >
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Passwort</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Passwort eingeben"
+              formControlName="password"
+            />
+            <mat-hint
+              *ngIf="pwdCtrl.touched && !pwdCtrl.valid"
+              class="input-error"
+              >Ein Password ist erforderlich</mat-hint
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="login-form-btn-group">
+          <button
+            mat-raised-button
+            type="submit"
+            title="Abbrechen"
+            color="warn"
+          >
+            Abbrechen
+          </button>
+          <button
+            mat-raised-button
+            type="submit"
+            title="Speichern"
+            color="primary"
+            [disabled]="!loginForm.valid"
+          >
+            Sign in
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
