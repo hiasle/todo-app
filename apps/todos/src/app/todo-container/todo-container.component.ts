@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 import * as uuid from 'uuid';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { ShoppingCartModel, ShoppingListState } from '../store/todos.state';
 
 @Component({
   selector: 'huber-todo-container',
@@ -25,6 +26,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 export class TodoContainerComponent implements OnInit {
   @Select(TodoListState) todos$: Observable<TodoModel[]>;
   @Select(TodoListState) todos2$: Observable<TodoModel[]>;
+  @Select(ShoppingListState) shoppingcarts$: Observable<ShoppingCartModel[]>;
   @Select(TagsState.tagNames) tagNames$: Observable<string[]>;
 
   todoForm: FormGroup;

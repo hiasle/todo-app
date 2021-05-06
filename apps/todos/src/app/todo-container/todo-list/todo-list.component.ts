@@ -14,6 +14,7 @@ import {
 import { Observable } from 'rxjs';
 import { TodoModel } from '../../store/state';
 import { Store } from '@ngxs/store';
+import { ShoppingCartService } from '../../shared/firebase/db/shopping-cart.service';
 
 @Component({
   selector: 'huber-todo-list',
@@ -23,11 +24,14 @@ import { Store } from '@ngxs/store';
 })
 export class TodoListComponent implements OnInit {
   @Input()
-  todos$: Observable<TodoModel[]>;
+  todos$: TodoModel[];
+  // todos$: Observable<TodoModel[]>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private scs: ShoppingCartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.scs.fetchUserCollection();
+  }
 
   toggleStatus(todo: TodoModel): void {
     this.store.dispatch(new FinishTodo(todo.id, !todo.finished));

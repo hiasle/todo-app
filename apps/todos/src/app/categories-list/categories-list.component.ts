@@ -9,9 +9,13 @@ import { FavoritesModel, FavoritesState } from '../store/favorites.state';
   styleUrls: ['./categories-list.component.css'],
 })
 export class CategoriesListComponent implements OnInit {
+  @Select(FavoritesState) favState$: Observable<FavoritesModel[]>;
   @Select(FavoritesState.categories) categories$: Observable<string[]>;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.favState$.subscribe(() => console.log));
+    console.log(this.categories$.subscribe(() => console.log));
+  }
 }

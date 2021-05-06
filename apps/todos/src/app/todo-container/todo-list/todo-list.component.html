@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let todo of todos$ | async" class="todo-item">
+  <mat-list-item *ngFor="let todo of todos$" class="todo-item">
     <mat-icon
       mat-list-icon
       *ngIf="todo.finished; else undone"

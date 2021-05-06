@@ -1,2 +1,8 @@
 <h1>Kategorien</h1>
-<p *ngFor="let c of categories$ | async">{{ c }}</p>
+
+<ul *ngFor="let item of favState$ | async">
+  {{
+    item.category
+  }}
+  <li *ngFor="let tag of item.tags">{{ tag }}</li>
+</ul>
