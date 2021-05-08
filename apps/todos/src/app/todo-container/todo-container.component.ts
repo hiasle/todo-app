@@ -16,6 +16,7 @@ import {
 import * as uuid from 'uuid';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ShoppingCartModel, ShoppingListState } from '../store/todos.state';
+import { DeleteShoppingCart } from '../store/shoppingcart/actions';
 
 @Component({
   selector: 'huber-todo-container',
@@ -29,4 +30,8 @@ export class TodoContainerComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {}
+
+  deleteShoppingCart(shoppingCart: ShoppingCartModel) {
+    this.store.dispatch(new DeleteShoppingCart(shoppingCart));
+  }
 }
