@@ -1,44 +1,24 @@
 <div class="todo-container">
+  <huber-add-new-shopping-cart></huber-add-new-shopping-cart>
+
   <mat-card *ngFor="let sc of shoppingcarts$ | async">
-    <mat-card-header class="card-header"
-      ><h2>{{ sc.name }}</h2></mat-card-header
-    >
+    <mat-card-header class="card-header">
+      <div class="header-content">
+        <h2>{{ sc.name }} [{{ sc.category }}]</h2>
+        <div class="todo-container-actions">
+          <huber-add-todo></huber-add-todo>
+          <button
+            mat-raised-button
+            type="submit"
+            title="Löschen"
+            color="primary"
+          >
+            <mat-icon mat-list-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="todoForm" (ngSubmit)="onSave()" class="todo-form">
-        <mat-form-field class="input-todo">
-          <mat-label>Name</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="name"
-            placeholder="z.B. Eier"
-            [errorStateMatcher]="errorMatcher"
-            [matAutocomplete]="auto"
-          />
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option
-              *ngFor="let option of tagNames$ | async"
-              [value]="option"
-            >
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-error *ngIf="name.hasError('required') && !todoForm.pristine">
-            Bitte einen Wert eingeben!
-          </mat-error>
-        </mat-form-field>
-
-        <button
-          mat-raised-button
-          type="submit"
-          title="Speichern"
-          color="primary"
-          [disabled]="!todoForm.valid"
-        >
-          <mat-icon mat-list-icon>save</mat-icon>
-        </button>
-      </form>
-
       <huber-todo-list [todos$]="sc.todos"></huber-todo-list>
     </mat-card-content>
   </mat-card>

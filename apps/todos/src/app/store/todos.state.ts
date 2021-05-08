@@ -1,18 +1,10 @@
 import { TagsService } from './../shared/tags.service';
 import { Action, NgxsOnInit, State, StateContext, Store } from '@ngxs/store';
 import { TodoService } from '../shared/todo.service';
-import {
-  AddTodo,
-  FinishTodo,
-  DeleteTodo,
-  GetTodos,
-  IncreaseAmountTodo,
-  DecreaseAmountTodo,
-  GetTags,
-} from './actions';
 import { map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AddShoppingCart } from './shoppingcart/actions';
 
 export interface ShoppingCartModel {
   id?: string;
@@ -65,7 +57,16 @@ export class ShoppingListState implements NgxsOnInit {
   constructor(private todoService: TodoService) {}
 
   ngxsOnInit(ctx: StateContext<TodoModel[]>) {
-    console.log('State initialized, now getting animals');
-    ctx.dispatch(new GetTodos());
+    console.log('State initialized, now getting shopping carts');
+    // ctx.dispatch(new GetTodos());
+  }
+
+  @Action(AddShoppingCart)
+  addShoppingCart(
+    ctx: StateContext<ShoppingCartModel[]>,
+    action: AddShoppingCart
+  ) {
+    const state = ctx.getState();
+    ctx.setState([...state, action.shoppingCart]);
   }
 }

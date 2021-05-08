@@ -16,7 +16,7 @@ export interface FavoritesModel {
     },
     {
       category: 'Pflegeprodukte',
-      tags: ['Eier', 'Mehl'],
+      tags: ['Shampoo', 'Duschgel'],
     },
   ],
 })

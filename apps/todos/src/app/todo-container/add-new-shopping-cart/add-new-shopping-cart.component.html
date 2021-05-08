@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="toolbar-row">
+    <form [formGroup]="scForm" (ngSubmit)="onAdd()" class="toolbar-form">
+      <div class="toolbar-input-group">
+        <mat-form-field class="input-todo">
+          <mat-label>Einkaufsliste</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="name"
+            placeholder="Name der Einkaufsliste"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-todo">
+          <mat-label>Kategorie</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="category"
+            placeholder="Kategorie"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of categories$ | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+      <button
+        mat-raised-button
+        type="submit"
+        title="Hinzufügen"
+        color="primary"
+        [disabled]="!scForm.valid"
+      >
+        <mat-icon mat-list-icon>add</mat-icon>
+      </button>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar>

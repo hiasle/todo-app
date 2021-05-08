@@ -1,0 +1,32 @@
+<p>{{ tagNames$ | async | json }}</p>
+<form [formGroup]="todoForm" (ngSubmit)="onSave()" class="todo-form">
+  <mat-form-field class="input-todo">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      type="text"
+      formControlName="name"
+      placeholder="z.B. Eier"
+      [errorStateMatcher]="errorMatcher"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of tagNames$ | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="name.hasError('required') && !todoForm.pristine">
+      Bitte einen Wert eingeben!
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    type="submit"
+    title="Speichern"
+    color="primary"
+    [disabled]="!todoForm.valid"
+  >
+    <mat-icon mat-list-icon>add</mat-icon>
+  </button>
+</form>

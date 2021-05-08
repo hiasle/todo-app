@@ -24,47 +24,9 @@ import { ShoppingCartModel, ShoppingListState } from '../store/todos.state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoContainerComponent implements OnInit {
-  @Select(TodoListState) todos$: Observable<TodoModel[]>;
-  @Select(TodoListState) todos2$: Observable<TodoModel[]>;
   @Select(ShoppingListState) shoppingcarts$: Observable<ShoppingCartModel[]>;
-  @Select(TagsState.tagNames) tagNames$: Observable<string[]>;
 
-  todoForm: FormGroup;
-
-  constructor(private fb: FormBuilder, private store: Store) {
-    this.todoForm = fb.group({
-      name: fb.control('', [Validators.required]),
-    });
-  }
-
-  get name(): FormControl {
-    return this.todoForm.controls['name'] as FormControl;
-  }
-
-  get errorMatcher(): ErrorStateMatcher {
-    return new TouchedErrorStateMatcher();
-  }
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
-
-  onSave(): void {
-    console.log('Form status: ', this.todoForm.status);
-    let newTodo: TodoModel = {
-      id: uuid.v4(),
-      name: this.todoForm.value.name,
-      finished: false,
-    };
-    this.store.dispatch(new AddTodo(newTodo));
-    this.todoForm.reset();
-    this.todoForm.markAsUntouched();
-  }
-}
-
-class TouchedErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    return !!(control && control.invalid && (control.dirty || control.touched));
-  }
 }

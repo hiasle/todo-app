@@ -33,9 +33,12 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './auth/verify-email/verify-email.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { FavoritesState } from './store/favorites.state';
 import { ShoppingListState } from './store/todos.state';
+import { AddNewShoppingCartComponent } from './todo-container/add-new-shopping-cart/add-new-shopping-cart.component';
+import { AddTodoComponent } from './todo-container/add-todo/add-todo.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { ShoppingListState } from './store/todos.state';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     CategoriesListComponent,
+    AddNewShoppingCartComponent,
+    AddTodoComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +80,7 @@ import { ShoppingListState } from './store/todos.state';
     MatRadioModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    MatToolbarModule,
     AppRoutingModule,
   ],
   providers: [

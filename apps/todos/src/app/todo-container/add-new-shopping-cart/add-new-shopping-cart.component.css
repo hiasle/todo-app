@@ -1,0 +1,18 @@
+.toolbar-row {
+  padding-top: 1rem;
+  height: 100%;
+}
+
+.toolbar-form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar-input-group {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
