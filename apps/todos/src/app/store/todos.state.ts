@@ -4,11 +4,7 @@ import { TodoService } from '../shared/todo.service';
 import { map, tap, takeUntil } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import {
-  AddShoppingCart,
-  FetchShoppingCarts,
-  DeleteShoppingCart,
-} from './shoppingcart/actions';
+import { ShoppingCart } from './shoppingcart/actions';
 import { ShoppingCartService } from '../shared/firebase/db/shopping-cart.service';
 
 export interface ShoppingCartModel {
@@ -67,25 +63,13 @@ export class ShoppingListState implements NgxsOnInit {
   data: ShoppingCartModel[];
 
   ngxsOnInit(ctx: StateContext<ShoppingCartModel[]>) {
-    console.log('State initialized, now getting shopping carts');
-    /* this.shoppingCartService
-      .fetchShoppingCarts()
-      .pipe(
-        map((data) => data as ShoppingCartModel[]),
-        tap((data) => console.log('Shopping cart data from Firestore: ', data))
-      )
-      .subscribe((data) => {
-        this.data = data;
-      });
-
-    console.log('Shopping cart data: ', this.data); */
-    ctx.dispatch(new FetchShoppingCarts());
+    ctx.dispatch(new ShoppingCart.FetchShoppingCarts());
   }
 
-  @Action(FetchShoppingCarts)
+  @Action(ShoppingCart.FetchShoppingCarts)
   fetchShoppingCarts(
     ctx: StateContext<ShoppingCartModel[]>,
-    action: FetchShoppingCarts
+    action: ShoppingCart.FetchShoppingCarts
   ) {
     const state = ctx.getState();
     return this.shoppingCartService
@@ -93,10 +77,10 @@ export class ShoppingListState implements NgxsOnInit {
       .pipe(map((data) => ctx.setState([...data])));
   }
 
-  @Action(AddShoppingCart)
+  @Action(ShoppingCart.AddShoppingCart)
   addShoppingCart(
     ctx: StateContext<ShoppingCartModel[]>,
-    action: AddShoppingCart
+    action: ShoppingCart.AddShoppingCart
   ) {
     const state = ctx.getState();
     return this.shoppingCartService
@@ -104,11 +88,56 @@ export class ShoppingListState implements NgxsOnInit {
       .pipe(tap(() => ctx.setState([...state, action.shoppingCart])));
   }
 
-  @Action(DeleteShoppingCart)
+  @Action(ShoppingCart.DeleteShoppingCart)
   deleteShoppingCart(
     ctx: StateContext<ShoppingCartModel[]>,
-    action: DeleteShoppingCart
+    action: ShoppingCart.DeleteShoppingCart
   ) {
     return this.shoppingCartService.deleteShoppingCart(action.shoppingCart);
+  }
+
+  @Action(ShoppingCart.UpdateShoppingCart)
+  updateShoppingCart(
+    ctx: StateContext<ShoppingCartModel[]>,
+    action: ShoppingCart.UpdateShoppingCart
+  ) {
+    return this.shoppingCartService.updateShoppingCart(action.shoppingCart);
+  }
+
+  @Action(ShoppingCart.ToggleTodo)
+  toggleTodo(
+    ctx: StateContext<ShoppingCartModel[]>,
+    action: ShoppingCart.ToggleTodo
+  ) {
+    const modifiedTodos = action.shoppingCart.todos.map((t) => {
+      if (t.id === action.todo.id) {
+        const modified = { ...t, finished: !t.finished };
+        console.log('Modified todo: ', modified);
+        return modified;
+      }
+      return t;
+    });
+    ctx.dispatch(
+      new ShoppingCart.UpdateShoppingCart({
+        ...action.shoppingCart,
+        todos: modifiedTodos,
+      })
+    );
+  }
+
+  @Action(ShoppingCart.DeleteTodo)
+  deleteTodo(
+    ctx: StateContext<ShoppingCartModel[]>,
+    action: ShoppingCart.DeleteTodo
+  ) {
+    const modifiedTodos = action.shoppingCart.todos.filter(
+      (t) => t.id !== action.todo.id
+    );
+    ctx.dispatch(
+      new ShoppingCart.UpdateShoppingCart({
+        ...action.shoppingCart,
+        todos: modifiedTodos,
+      })
+    );
   }
 }

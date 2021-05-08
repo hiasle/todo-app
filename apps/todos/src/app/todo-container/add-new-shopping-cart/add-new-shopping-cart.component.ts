@@ -5,9 +5,9 @@ import { distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import { ShoppingCartModel } from '../../store/todos.state';
 import * as uuid from 'uuid';
 import { Select, Store } from '@ngxs/store';
-import { AddShoppingCart } from '../../store/shoppingcart/actions';
 import { FavoritesState } from '../../store/favorites.state';
 import { Observable } from 'rxjs';
+import { ShoppingCart } from '../../store/shoppingcart/actions';
 
 @Component({
   selector: 'huber-add-new-shopping-cart',
@@ -47,7 +47,7 @@ export class AddNewShoppingCartComponent implements OnInit, OnDestroy {
       todos: [],
     };
     // TODO dispatch into store
-    this.store.dispatch(new AddShoppingCart(newShoppingCart));
+    this.store.dispatch(new ShoppingCart.AddShoppingCart(newShoppingCart));
     this.scForm.markAsUntouched();
     this.scForm.markAsPristine();
     this.scForm.clearValidators();

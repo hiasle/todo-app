@@ -18,20 +18,9 @@ export class ShoppingCartService {
     ShoppingCartModel[]
   > = null;
 
-  private readonly collections: AngularFirestoreCollection<ShoppingCartModel[]>;
-  private readonly collection: AngularFirestoreCollection<ShoppingCartModel>;
-
   constructor(public db: AngularFirestore) {
-    console.log('Intialize collections');
-    /* this.afs
-      .collection('users')
-      .snapshotChanges()
-      .subscribe(() => console.log); */
     this.shoppingCartRef = db.collection(this.dbPath);
     this.shoppingCartsRef = db.collection(this.dbPath);
-
-    this.collections = this.db.collection('shoppingcarts');
-    this.collection = this.db.collection('shoppingcarts');
   }
 
   fetchShoppingCarts(): Observable<any> {
@@ -39,11 +28,11 @@ export class ShoppingCartService {
       tap((changes) => console.log('changes from firestore: ', changes)),
       map((changes) =>
         changes.map((c) => {
-          console.log(
+          /* console.log(
             `Changes payload: ${JSON.stringify(c.payload.doc)}, id: ${
               c.payload.doc.id
             }, data: ${JSON.stringify(c.payload.doc.data())}`
-          );
+          ); */
           return {
             ...c.payload.doc.data(),
             id: c.payload.doc.id,
@@ -61,10 +50,14 @@ export class ShoppingCartService {
   }
 
   addShoppingCart(shoppingCart: ShoppingCartModel): Observable<void> {
-    return from(this.collection.doc().set(shoppingCart));
+    return from(this.shoppingCartRef.doc().set(shoppingCart));
   }
 
   deleteShoppingCart(shoppingCart: ShoppingCartModel): Observable<void> {
     return from(this.shoppingCartsRef.doc(shoppingCart.id).delete());
+  }
+
+  updateShoppingCart(shoppingCart: ShoppingCartModel): Observable<void> {
+    return from(this.shoppingCartRef.doc(shoppingCart.id).update(shoppingCart));
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -10,10 +10,12 @@ import {
 import * as uuid from 'uuid';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { TodoModel } from '../../store/state';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { TagsState } from '../../store/tags.state';
 import { Observable } from 'rxjs';
 import { FavoritesState } from '../../store/favorites.state';
+import { ShoppingCartModel } from '../../store/todos.state';
+import { ShoppingCart } from '../../store/shoppingcart/actions';
 
 @Component({
   selector: 'huber-add-todo',
@@ -23,9 +25,12 @@ import { FavoritesState } from '../../store/favorites.state';
 export class AddTodoComponent implements OnInit {
   @Select(FavoritesState.categories) tagNames$: Observable<string[]>;
 
+  @Input()
+  shoppingCart: ShoppingCartModel;
+
   todoForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store) {
     this.todoForm = fb.group({
       name: fb.control('', [Validators.required]),
     });
@@ -40,8 +45,11 @@ export class AddTodoComponent implements OnInit {
       name: this.todoForm.value.name,
       finished: false,
     };
-    // TODO store action
-    // this.store.dispatch(new AddTodo(newTodo));
+    const shoppingCartCopy = {
+      ...this.shoppingCart,
+      todos: [...this.shoppingCart.todos, newTodo],
+    };
+    this.store.dispatch(new ShoppingCart.UpdateShoppingCart(shoppingCartCopy));
     this.todoForm.reset();
     this.todoForm.markAsUntouched();
   }

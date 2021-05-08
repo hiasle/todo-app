@@ -11,10 +11,10 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { Observable } from 'rxjs';
 import { TodoModel } from '../../store/state';
 import { Store } from '@ngxs/store';
-import { ShoppingCartService } from '../../shared/firebase/db/shopping-cart.service';
+import { ShoppingCart } from '../../store/shoppingcart/actions';
+import { ShoppingCartModel } from '../../store/todos.state';
 
 @Component({
   selector: 'huber-todo-list',
@@ -25,20 +25,20 @@ import { ShoppingCartService } from '../../shared/firebase/db/shopping-cart.serv
 export class TodoListComponent implements OnInit {
   @Input()
   todos$: TodoModel[];
-  // todos$: Observable<TodoModel[]>;
 
-  constructor(private store: Store, private scs: ShoppingCartService) {}
+  @Input()
+  shoppingCart: ShoppingCartModel;
 
-  ngOnInit(): void {
-    this.scs.fetchUserCollection();
-  }
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {}
 
   toggleStatus(todo: TodoModel): void {
-    this.store.dispatch(new FinishTodo(todo.id, !todo.finished));
+    this.store.dispatch(new ShoppingCart.ToggleTodo(this.shoppingCart, todo));
   }
 
   deleteTodo(todo: TodoModel): void {
-    this.store.dispatch(new DeleteTodo(todo.id));
+    this.store.dispatch(new ShoppingCart.DeleteTodo(this.shoppingCart, todo));
   }
 
   decreaseAmount(id: string): void {

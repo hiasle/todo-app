@@ -1,14 +1,12 @@
 <div class="todo-container">
   <huber-add-new-shopping-cart></huber-add-new-shopping-cart>
 
-  <p>Todo Container: {{ shoppingcarts$ | async | json }}</p>
-
   <mat-card *ngFor="let sc of shoppingcarts$ | async">
     <mat-card-header class="card-header">
       <div class="header-content">
         <h2>{{ sc.name }} [{{ sc.category }}]</h2>
         <div class="todo-container-actions">
-          <huber-add-todo></huber-add-todo>
+          <huber-add-todo [shoppingCart]="sc"></huber-add-todo>
           <button
             mat-raised-button
             type="submit"
@@ -22,7 +20,10 @@
       </div>
     </mat-card-header>
     <mat-card-content>
-      <huber-todo-list [todos$]="sc.todos"></huber-todo-list>
+      <huber-todo-list
+        [shoppingCart]="sc"
+        [todos$]="sc.todos"
+      ></huber-todo-list>
     </mat-card-content>
   </mat-card>
 </div>
