@@ -25,14 +25,8 @@ export class ShoppingCartService {
 
   fetchShoppingCarts(): Observable<any> {
     return this.shoppingCartsRef.snapshotChanges().pipe(
-      tap((changes) => console.log('changes from firestore: ', changes)),
       map((changes) =>
         changes.map((c) => {
-          /* console.log(
-            `Changes payload: ${JSON.stringify(c.payload.doc)}, id: ${
-              c.payload.doc.id
-            }, data: ${JSON.stringify(c.payload.doc.data())}`
-          ); */
           return {
             ...c.payload.doc.data(),
             id: c.payload.doc.id,

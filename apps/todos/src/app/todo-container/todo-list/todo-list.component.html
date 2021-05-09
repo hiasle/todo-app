@@ -40,7 +40,7 @@
         title="-1"
         color="warn"
         [disabled]="todo.finished"
-        (click)="decreaseAmount(todo.id)"
+        (click)="decreaseAmount(todo)"
       >
         <mat-icon mat-list-icon>remove</mat-icon>
       </button>
@@ -50,7 +50,7 @@
         title="+1"
         color="warn"
         [disabled]="todo.finished"
-        (click)="increaseAmount(todo.id)"
+        (click)="increaseAmount(todo)"
       >
         <mat-icon mat-list-icon>add</mat-icon>
       </button>

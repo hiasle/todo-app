@@ -35,4 +35,28 @@ export namespace ShoppingCart {
       public todo: TodoModel
     ) {}
   }
+
+  export class DecreaseAmountTodo {
+    static readonly type = '[Shopping Cart -> Todo] Decrease Amount Todo';
+    constructor(
+      public shoppingCart: ShoppingCartModel,
+      public todo: TodoModel
+    ) {}
+  }
+
+  export class IncreaseAmountTodo {
+    static readonly type = '[Shopping Cart -> Todo] Increase Amount Todo';
+    constructor(
+      public shoppingCart: ShoppingCartModel,
+      public todo: TodoModel
+    ) {}
+  }
+
+  export class AddTag {
+    static readonly type = '[Shopping Cart -> Tag] Add Tag';
+    constructor(
+      public shoppingCart: ShoppingCartModel,
+      public todo: TodoModel
+    ) {}
+  }
 }

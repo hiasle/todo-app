@@ -111,9 +111,7 @@ export class ShoppingListState implements NgxsOnInit {
   ) {
     const modifiedTodos = action.shoppingCart.todos.map((t) => {
       if (t.id === action.todo.id) {
-        const modified = { ...t, finished: !t.finished };
-        console.log('Modified todo: ', modified);
-        return modified;
+        return { ...t, finished: !t.finished };
       }
       return t;
     });
@@ -139,5 +137,73 @@ export class ShoppingListState implements NgxsOnInit {
         todos: modifiedTodos,
       })
     );
+  }
+
+  @Action(ShoppingCart.IncreaseAmountTodo)
+  increaseAmountTodo(
+    ctx: StateContext<ShoppingCartModel[]>,
+    action: ShoppingCart.IncreaseAmountTodo
+  ) {
+    const modifiedTodos = action.shoppingCart.todos.map((t) => {
+      if (t.id === action.todo.id) {
+        console.log('Todo before: ', t);
+        const modified = {
+          ...t,
+          amount: this.increaseAmount(t.amount),
+        };
+        console.log('Todo after: ', modified);
+        return modified;
+      }
+      return t;
+    });
+    ctx.dispatch(
+      new ShoppingCart.UpdateShoppingCart({
+        ...action.shoppingCart,
+        todos: modifiedTodos,
+      })
+    );
+  }
+
+  @Action(ShoppingCart.DecreaseAmountTodo)
+  decreaseAmountTodo(
+    ctx: StateContext<ShoppingCartModel[]>,
+    action: ShoppingCart.DecreaseAmountTodo
+  ) {
+    const modifiedTodos = action.shoppingCart.todos.map((t) => {
+      if (t.id === action.todo.id) {
+        console.log('Todo before: ', t);
+        const modified = {
+          ...t,
+          amount: this.decreaseAmount(t.amount),
+        };
+        console.log('Todo after: ', modified);
+        return modified;
+      }
+      return t;
+    });
+    ctx.dispatch(
+      new ShoppingCart.UpdateShoppingCart({
+        ...action.shoppingCart,
+        todos: modifiedTodos,
+      })
+    );
+  }
+
+  // DecreaseAmountTodo, IncreaseAmountTodo, AddTag
+
+  private increaseAmount(amount?: number): number {
+    if (amount || amount === 0) {
+      return amount + 1;
+    } else {
+      return 0;
+    }
+  }
+
+  private decreaseAmount(amount?: number): number {
+    if (amount && amount !== 0) {
+      return amount - 1;
+    } else {
+      return 0;
+    }
   }
 }

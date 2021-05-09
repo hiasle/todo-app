@@ -41,12 +41,16 @@ export class TodoListComponent implements OnInit {
     this.store.dispatch(new ShoppingCart.DeleteTodo(this.shoppingCart, todo));
   }
 
-  decreaseAmount(id: string): void {
-    this.store.dispatch(new DecreaseAmountTodo(id));
+  decreaseAmount(todo: TodoModel): void {
+    this.store.dispatch(
+      new ShoppingCart.DecreaseAmountTodo(this.shoppingCart, todo)
+    );
   }
 
-  increaseAmount(id: string): void {
-    this.store.dispatch(new IncreaseAmountTodo(id));
+  increaseAmount(todo: TodoModel): void {
+    this.store.dispatch(
+      new ShoppingCart.IncreaseAmountTodo(this.shoppingCart, todo)
+    );
   }
 
   addTag(name: string): void {

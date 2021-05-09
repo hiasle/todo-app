@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { TagsService } from '../shared/firebase/db/tags.service';
 import { FavoritesModel, FavoritesState } from '../store/favorites.state';
 
 @Component({
@@ -12,10 +13,13 @@ export class CategoriesListComponent implements OnInit {
   @Select(FavoritesState) favState$: Observable<FavoritesModel[]>;
   @Select(FavoritesState.categories) categories$: Observable<string[]>;
 
-  constructor() {}
+  constructor(private tagService: TagsService) {}
 
   ngOnInit(): void {
     console.log(this.favState$.subscribe(() => console.log));
     console.log(this.categories$.subscribe(() => console.log));
+    this.tagService
+      .fetchAllTags()
+      .subscribe((data) => console.log('All tags fetched: ', data));
   }
 }
