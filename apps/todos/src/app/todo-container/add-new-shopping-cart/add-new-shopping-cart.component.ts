@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { from, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
-import { ShoppingCartModel } from '../../store/todos.state';
 import * as uuid from 'uuid';
 import { Select, Store } from '@ngxs/store';
-import { FavoritesState } from '../../store/favorites.state';
 import { Observable } from 'rxjs';
 import { ShoppingCart } from '../../store/shoppingcart/actions';
+import { ShoppingCartModel } from '../../store/shopping-carts.state';
 
 @Component({
   selector: 'huber-add-new-shopping-cart',
@@ -17,7 +16,7 @@ import { ShoppingCart } from '../../store/shoppingcart/actions';
 export class AddNewShoppingCartComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
-  @Select(FavoritesState.categories) categories$: Observable<string[]>;
+  categories$: Observable<string[]> = from([]);
 
   scForm: FormGroup;
 

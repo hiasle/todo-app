@@ -1,25 +1,19 @@
 import {
-  FinishTodo,
-  DeleteTodo,
-  DecreaseAmountTodo,
-  IncreaseAmountTodo,
-  AddTag,
-} from './../../store/actions';
-import {
   ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { TodoModel } from '../../store/state';
 import { Store } from '@ngxs/store';
+import { ShoppingCartModel, TodoModel } from '../../store/shopping-carts.state';
 import { ShoppingCart } from '../../store/shoppingcart/actions';
-import { ShoppingCartModel } from '../../store/todos.state';
+import { Tag } from '../../store/tags/actions';
+import { TagsModel } from '../../store/tags.state';
 
 @Component({
   selector: 'huber-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css'],
+  styleUrls: ['./todo-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent implements OnInit {
@@ -54,6 +48,12 @@ export class TodoListComponent implements OnInit {
   }
 
   addTag(name: string): void {
-    this.store.dispatch(new AddTag({ name: name }));
+    // TODO dispatch
+    let newTag: TagsModel = {
+      category: this.shoppingCart.category,
+      tags: [name],
+    };
+
+    this.store.dispatch(new Tag.AddTag(newTag));
   }
 }

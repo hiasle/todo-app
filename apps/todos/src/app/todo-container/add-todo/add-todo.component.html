@@ -1,5 +1,23 @@
-<p>{{ tagNames$ | async | json }}</p>
-<form [formGroup]="todoForm" (ngSubmit)="onSave()" class="todo-form">
+<form [formGroup]="todoForm" class="me-3" (ngSubmit)="onSave()">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Artikel..."
+      aria-label="Artikel..."
+      formControlName="name"
+    />
+    <button
+      class="btn btn-outline-secondary"
+      type="submit"
+      [disabled]="!todoForm.valid"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</form>
+
+<!-- <form [formGroup]="todoForm" (ngSubmit)="onSave()" class="todo-form">
   <mat-form-field class="input-todo">
     <mat-label>Name</mat-label>
     <input
@@ -29,4 +47,4 @@
   >
     <mat-icon mat-list-icon>add</mat-icon>
   </button>
-</form>
+</form> -->

@@ -1,4 +1,4 @@
-import { ShoppingCartModel, TodoModel } from '../todos.state';
+import { ShoppingCartModel, TodoModel } from '../shopping-carts.state';
 
 export namespace ShoppingCart {
   export class FetchShoppingCarts {
@@ -46,14 +46,6 @@ export namespace ShoppingCart {
 
   export class IncreaseAmountTodo {
     static readonly type = '[Shopping Cart -> Todo] Increase Amount Todo';
-    constructor(
-      public shoppingCart: ShoppingCartModel,
-      public todo: TodoModel
-    ) {}
-  }
-
-  export class AddTag {
-    static readonly type = '[Shopping Cart -> Tag] Add Tag';
     constructor(
       public shoppingCart: ShoppingCartModel,
       public todo: TodoModel

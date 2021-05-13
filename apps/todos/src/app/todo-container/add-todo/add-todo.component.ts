@@ -9,13 +9,11 @@ import {
 } from '@angular/forms';
 import * as uuid from 'uuid';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { TodoModel } from '../../store/state';
 import { Select, Store } from '@ngxs/store';
-import { TagsState } from '../../store/tags.state';
 import { Observable } from 'rxjs';
-import { FavoritesState } from '../../store/favorites.state';
-import { ShoppingCartModel } from '../../store/todos.state';
 import { ShoppingCart } from '../../store/shoppingcart/actions';
+import { ShoppingCartModel, TodoModel } from '../../store/shopping-carts.state';
+import { TagsState } from '../../store/tags.state';
 
 @Component({
   selector: 'huber-add-todo',
@@ -23,7 +21,7 @@ import { ShoppingCart } from '../../store/shoppingcart/actions';
   styleUrls: ['./add-todo.component.css'],
 })
 export class AddTodoComponent implements OnInit {
-  @Select(FavoritesState.categories) tagNames$: Observable<string[]>;
+  @Select(TagsState.categories) tagNames$: Observable<string[]>;
 
   @Input()
   shoppingCart: ShoppingCartModel;

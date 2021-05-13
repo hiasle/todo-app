@@ -1,6 +1,4 @@
-import { TagsService } from './../shared/tags.service';
 import { Action, NgxsOnInit, State, StateContext, Store } from '@ngxs/store';
-import { TodoService } from '../shared/todo.service';
 import { map, tap, takeUntil } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
@@ -54,11 +52,8 @@ export interface TodoModel {
   ],
 })
 @Injectable()
-export class ShoppingListState implements NgxsOnInit {
-  constructor(
-    private todoService: TodoService,
-    private shoppingCartService: ShoppingCartService
-  ) {}
+export class ShoppingCartsState implements NgxsOnInit {
+  constructor(private shoppingCartService: ShoppingCartService) {}
 
   data: ShoppingCartModel[];
 

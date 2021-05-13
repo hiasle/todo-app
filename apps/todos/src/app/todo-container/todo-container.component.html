@@ -1,29 +1,32 @@
-<div class="todo-container">
+<huber-header>
   <huber-add-new-shopping-cart></huber-add-new-shopping-cart>
+</huber-header>
 
-  <mat-card *ngFor="let sc of shoppingcarts$ | async">
-    <mat-card-header class="card-header">
-      <div class="header-content">
-        <h2>{{ sc.name }} [{{ sc.category }}]</h2>
-        <div class="todo-container-actions">
+<div class="container-fluid">
+  <div class="card" *ngFor="let sc of shoppingcarts$ | async">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex flex-column card-title">
+          <h2 class="m-0">{{ sc.name }}</h2>
+          <h6 class="fw-light fst-italic">{{ sc.category }}</h6>
+        </div>
+
+        <div class="d-flex">
           <huber-add-todo [shoppingCart]="sc"></huber-add-todo>
           <button
-            mat-raised-button
-            type="submit"
+            type="button"
+            class="btn btn-danger"
             title="Löschen"
-            color="primary"
             (click)="deleteShoppingCart(sc)"
           >
-            <mat-icon mat-list-icon>delete</mat-icon>
+            <i class="fas fa-trash-alt"></i>
           </button>
         </div>
       </div>
-    </mat-card-header>
-    <mat-card-content>
       <huber-todo-list
         [shoppingCart]="sc"
         [todos$]="sc.todos"
       ></huber-todo-list>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

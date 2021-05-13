@@ -4,9 +4,8 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
-import { User } from '../auth/user';
-import { ShoppingCartModel } from '../../../store/todos.state';
 import { map, tap } from 'rxjs/operators';
+import { ShoppingCartModel } from '../../../store/shopping-carts.state';
 
 @Injectable({
   providedIn: 'root',

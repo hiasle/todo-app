@@ -1,5 +1,14 @@
+.list-group {
+  li {
+    div.input-group {
+      width: auto;
+    }
+  }
+}
+
 .todo-finished {
   text-decoration: line-through;
+  font-style: italic;
 }
 
 .todo-item {

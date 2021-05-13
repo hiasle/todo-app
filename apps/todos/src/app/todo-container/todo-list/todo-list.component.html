@@ -1,69 +1,51 @@
-<mat-list>
-  <mat-list-item *ngFor="let todo of todos$" class="todo-item">
-    <mat-icon
-      mat-list-icon
-      *ngIf="todo.finished; else undone"
-      (click)="toggleStatus(todo)"
-      >done</mat-icon
-    >
-    <ng-template #undone>
-      <mat-icon
-        matBadge="{{ todo.amount }}"
-        matBadgeColor="primary"
-        mat-list-icon
-        #undone
-        (click)="toggleStatus(todo)"
-        >shopping_cart</mat-icon
-      >
-    </ng-template>
-    <div
-      mat-line
-      [class.todo-finished]="todo.finished"
-      (click)="toggleStatus(todo)"
-    >
-      {{ todo.name }}
+<ul class="list-group" *ngFor="let todo of todos$">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="flex-grow-1" [class.todo-finished]="todo.finished">
+      <span class="me-2" style="cursor: pointer" (click)="toggleStatus(todo)">{{
+        todo.name
+      }}</span>
+      <span class="badge bg-primary rounded-pill">{{ todo.amount }}</span>
     </div>
 
-    <div class="todo-button-group">
+    <div class="input-group">
       <button
         type="button"
-        mat-raised-button
+        class="btn btn-outline-secondary"
         title="taggen"
-        color="warn"
         (click)="addTag(todo.name)"
       >
-        <mat-icon mat-list-icon>star</mat-icon>
+        <i class="fas fa-star"></i>
       </button>
+
       <button
         type="button"
-        mat-raised-button
-        title="-1"
-        color="warn"
+        class="btn btn-outline-secondary"
+        title="-"
         [disabled]="todo.finished"
         (click)="decreaseAmount(todo)"
       >
-        <mat-icon mat-list-icon>remove</mat-icon>
+        <i class="fas fa-minus"></i>
       </button>
+
       <button
         type="button"
-        mat-raised-button
-        title="+1"
-        color="warn"
+        class="btn btn-outline-secondary"
+        title="+"
         [disabled]="todo.finished"
         (click)="increaseAmount(todo)"
       >
-        <mat-icon mat-list-icon>add</mat-icon>
+        <i class="fas fa-plus"></i>
       </button>
+
       <button
         type="button"
-        mat-raised-button
-        title="Löschen"
-        color="warn"
+        class="btn btn-outline-secondary"
+        title="löschen"
         [disabled]="!todo.finished"
         (click)="deleteTodo(todo)"
       >
-        <mat-icon mat-list-icon>delete</mat-icon>
+        <i class="fas fa-trash"></i>
       </button>
     </div>
-  </mat-list-item>
-</mat-list>
+  </li>
+</ul>

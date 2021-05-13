@@ -1,5 +1,4 @@
 import { AppRoutingModule } from './app-routing.module';
-import { TagsModel, TagsState } from './store/tags.state';
 import { LoggingHttpInterceptor } from './shared/logging-http-interceptor';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +9,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { TodoListState } from './store/state';
 import { TodoContainerComponent } from './todo-container/todo-container.component';
 import { TodoListComponent } from './todo-container/todo-list/todo-list.component';
 import { environment } from '../environments/environment';
@@ -35,10 +33,11 @@ import { VerifyEmailComponent } from './auth/verify-email/verify-email.component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
-import { FavoritesState } from './store/favorites.state';
-import { ShoppingListState } from './store/todos.state';
 import { AddNewShoppingCartComponent } from './todo-container/add-new-shopping-cart/add-new-shopping-cart.component';
 import { AddTodoComponent } from './todo-container/add-todo/add-todo.component';
+import { TagsState } from './store/tags.state';
+import { ShoppingCartsState } from './store/shopping-carts.state';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -52,15 +51,13 @@ import { AddTodoComponent } from './todo-container/add-todo/add-todo.component';
     CategoriesListComponent,
     AddNewShoppingCartComponent,
     AddTodoComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot(
-      [TodoListState, TagsState, FavoritesState, ShoppingListState],
-      {
-        developmentMode: !environment.production,
-      }
-    ),
+    NgxsModule.forRoot([TagsState, ShoppingCartsState], {
+      developmentMode: !environment.production,
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

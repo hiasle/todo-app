@@ -1,31 +1,20 @@
-import { TagsState } from './../store/tags.state';
-import { AddTodo } from './../store/actions';
-import { TodoListState, TodoModel } from './../store/state';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  NgForm,
-  Validators,
-} from '@angular/forms';
-import * as uuid from 'uuid';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { ShoppingCartModel, ShoppingListState } from '../store/todos.state';
 import { ShoppingCart } from '../store/shoppingcart/actions';
+import {
+  ShoppingCartModel,
+  ShoppingCartsState,
+} from '../store/shopping-carts.state';
 
 @Component({
   selector: 'huber-todo-container',
   templateUrl: './todo-container.component.html',
-  styleUrls: ['./todo-container.component.css'],
+  styleUrls: ['./todo-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoContainerComponent implements OnInit {
-  @Select(ShoppingListState) shoppingcarts$: Observable<ShoppingCartModel[]>;
+  @Select(ShoppingCartsState) shoppingcarts$: Observable<ShoppingCartModel[]>;
 
   constructor(private store: Store) {}
 

@@ -1,0 +1,8 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.header-container {
+  background-color: $primary;
+  color: white;
+}
