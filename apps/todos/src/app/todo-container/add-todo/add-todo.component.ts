@@ -41,6 +41,7 @@ export class AddTodoComponent implements OnInit {
     let newTodo: TodoModel = {
       id: uuid.v4(),
       name: this.todoForm.value.name,
+      amount: 1,
       finished: false,
     };
     const shoppingCartCopy = {
