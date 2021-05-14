@@ -6,8 +6,7 @@ import { AuthGuardGuard } from './shared/firebase/auth/auth-guard.guard';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
-  { path: '', redirectTo: '/todo', pathMatch: 'full' },
+  { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   {
     path: 'todo',
@@ -22,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
